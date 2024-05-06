@@ -20,6 +20,12 @@ enableRobotsTXT = true
 
 [menu]
   [[menu.main]]
+    identifier = "home"
+    name = "Home"
+    url = "/"
+    weight = 1
+
+  [[menu.main]]
     # Unique identifier for a menu item
     identifier = "posts"
 
@@ -35,19 +41,19 @@ enableRobotsTXT = true
     name = "Posts"
 
     # Weights are used to determine the ordering
-    weight = 1
+    weight = 2
 
   [[menu.main]]
     identifier = "about"
     name = "About"
     url = "/about/"
-    weight = 2
+    weight = 3
     # pre = "<span data-feather='info'></span>"
 
   [[menu.main]]
     identifier = "github"
     url = "https://github.com/spectre10/spectre10.github.io"
-    weight = 3
+    weight = 4
 
     # We use feather-icons: https://feathericons.com/
     pre = "<span data-feather='github'></span>"
