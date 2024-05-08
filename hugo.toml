@@ -58,6 +58,12 @@ enableRobotsTXT = true
     # We use feather-icons: https://feathericons.com/
     pre = "<span data-feather='github'></span>"
 
+  [[menu.main]]
+    identifier = "rss"
+    pre = "<span data-feather='rss'></span>"
+    url = "/index.xml"
+    weight = 5
+
 [params]
   footer = "Ghanshyam Thakkar"
   description = "Developer, Student, Open Source Enthusiast"
