@@ -26,9 +26,11 @@ and these binaries take arguments/options for a desired output. These binaries a
 shell scripts to test their output against the expected output.
 
 However, due to many reasons outlined in my proposal,
-this setup of testing through shell scripts may not be ideal. Therefore, a new TAP implementation of a unit testing framework
+this setup of testing through shell scripts may not be ideal. Therefore, a new [TAP](https://testanything.org/) <span style="color:red">(</span>
+Test Anything Protocol, which allows individual tests/TAP producers to communicate
+test results to the testing harness in a language-agnostic way<span style="color:red">)</span> implementation of a unit testing framework
 was merged into Git late last year, which allows us to write unit tests solely in C. And this project involves
-converting some of the existing unit tests (shell scripts based ones) to C using the new framework.
+converting some of the existing unit tests (shell script based ones) to C using the new framework.
 However, some these t/helper binaries are also used as utility tools for setup purposes elsewhere
 in the testing suite, therefore these types of binaries would be low on the priority list of possible
 migrations to the new unit testing framework.
