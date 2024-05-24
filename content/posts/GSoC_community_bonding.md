@@ -20,9 +20,9 @@ Achu Luma (Outreachy intern) to get them merged. Here are the mailing list threa
 - [t-hash](https://lore.kernel.org/git/20240523235945.26833-1-shyamthakkar001@gmail.com/)
 
 Another one was t-date, which used _tzset()_ to change the timezones during runtime.
-It worked perfectly on unix systems (linux, mac), but the windows tests were failing
+It worked perfectly on Unix Systems (Linux, MacOS), but the Windows tests were failing
 due _tzset()_ not changing the timezones. Considering that I have no developmental
-experience on windows, I have decided to not pursue this patch.
+experience on Windows, I have decided to not pursue this patch.
 
 ## Some ideas which have been cooking in my mind
 
@@ -32,15 +32,15 @@ realised that if we want to port more tests, we would need something similar to
 then we can define some commonly used utility functions and test-lib enhancements.
 One of those is initializing a repo/object store for the unit tests to use.
 This would allow for many of the tests such as `t0062-revision-walking` to be
-ported over easily. Ofcourse if we are going to do this, we would also have make
+ported over easily. Of course if we are going to do this, we would also have to make
 helper functions for creating commits and creating files/folders. I am exploring
 what the best way to achieve this would be. Maybe there exists some helper
 functions already inside git codebase to partially achieve this, otherwise
 we can always spawn commands directly.
 
 Another idea which has been floating around in my mind is having a utility function
-in test-lib-functions.c, which creates _object_id_ when given an arbitrary string of
-length no more than the max hexsz of the hash algorithm used. Something like:
+in `test-lib-functions.c`, which creates _object_id_ when given an arbitrary string of
+length no more than the max hex size of the hash algorithm used. Something like:
 
 ```c
 int get_oid_loc(const char *hex, size_t sz, int hash_algo, struct object_id *oid)
@@ -53,9 +53,8 @@ int get_oid_loc(const char *hex, size_t sz, int hash_algo, struct object_id *oid
 		return -1;
 	}
 
-	strbuf_add(&buf, hex, sz - 1);
-	for (i = sz; i <= hash_algos[hash_algo].hexsz; i++)
-		strbuf_addch(&buf, hex[sz - 1]);
+	strbuf_add(&buf, hex, sz);
+	strbuf_addchars(&buf, hex[sz - 1], hash_algos[hash_algo].hexsz - sz);
 
 	ret = get_oid_hex_algop(buf.buf, oid, &hash_algos[hash_algo]);
 	strbuf_release(&buf);
@@ -66,12 +65,12 @@ int get_oid_loc(const char *hex, size_t sz, int hash_algo, struct object_id *oid
 To give an overview, if we give a string 'abc', it will generate an _object_id_ with the hex
 'abcccccccccccccccccccccccccccccccccccccc' for SHA-1. For '1', it will generate '1111111111111111111111111111111111111111'.
 I have created a prototype implementation of t-oidtree [here](https://github.com/spectre10/git/commit/16682a964ce94dd6fd68bb355f591fd61dde2fae)
-which uses this function to create `object_id`.
+which uses this function to create _object_id_.
 
 I believe these small utility functions will make for a better developer experience when
 writing unit tests. To give an example of where these might be used, the function to generate
-`object_id`, as I already described above, can be used in `t-oidtree` (for t0069-oidtree) and also in `t-oid-array` (for t0064-oid-array).
-And the helper functions for initializing and using a repo can be used in t-oidmap, t-revision-walking,
+_object_id_, as I already described above, can be used in `t-oidtree` (for `t0069-oidtree`) and also in `t-oid-array` (for `t0064-oid-array`).
+And the helper functions for initializing and using a repo can be used in `t-oidmap`, `t-revision-walking`,
 etc.
 
 ## What I plan on doing next?
