@@ -76,7 +76,7 @@ etc.
 ## What I plan on doing next?
 
 I have compiled a list of potential tests which can be migrated, and when the coding period
-starts (27th June), I will begin migrating with the `test-example-decorate.c` helper. I have
+starts (27th May), I will begin migrating with the `test-example-decorate.c` helper. I have
 made a implementation just for CI testing, which can be seen [here](https://github.com/spectre10/git/commit/5d7e794134699ae14ab5a2d0ce39e8d0248fb915). And if you want to follow
 the development, the branches have a number suffixed to their name, which tells the
 iteration number (latest being the one with the highest number).
