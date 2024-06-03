@@ -1,14 +1,14 @@
 ---
 title: "GSoC: Week 1"
-date: 2024-06-02
+date: 2024-06-03
 description: ""
 type: post
 weight: 25
-showTableOfContents: true
+showTableOfContents: false
 ---
 ## What did I do in this period?
 
-As I talked about in my previous blog, I countinued some of the patches of Achu Luma (Outreachy Intern).
+As I talked about in my previous blog, I continued some of the patches of Achu Luma (Outreachy Intern).
 And to give a brief overview of the progress,
 
  - [t-strcmp-offset](https://lore.kernel.org/git/20240519204530.12258-3-shyamthakkar001@gmail.com/) (Co-authered-by: [Achu Luma](https://github.com/achluma)) (master)
@@ -25,7 +25,7 @@ list, but can be seen in my [repo](https://github.com/spectre10/git/commit/d5bae
 In my last blog, I talked about introducing a test-lib-functions.c library for utility functions, well if you take a look
 at the `t-oidtree` migration I linked above, that introduces something similar called lib-oid. The methods in that library are also similar
 to what I talked about in my previous blog. Namely _get_oid_arbitrary_hex()_, which converts arbitrary hex string to _object_id_.
-Apart from `t-oidtree`, this will also be useful when we port `helper/test-oid-array.c` and `t0064-oid-tree.sh`.
+Apart from `t-oidtree`, this will also be useful when we port `helper/test-oid-array.c` and `t0064-oid-array.sh`.
 
 ## What is the plan ahead?
 
@@ -46,16 +46,13 @@ I experimented locally for this one. Although setting up a repo can be done easi
 int test_setup_repo(void)
 {
 	const char *git_dir = "unit-tests/.git";
-	const char *git_dir_parent = strrchr(git_dir, '/');
-	char *rel = xstrndup(git_dir, git_dir_parent - git_dir);
-	git_work_tree_cfg = real_pathdup(rel, 1);
+	git_work_tree_cfg = real_pathdup("unit-tests", 1);
 
 	set_git_work_tree(git_work_tree_cfg);
 	if (access(get_git_work_tree(), X_OK))
 		die_errno(_("Cannot access work tree '%s'"),
 			  get_git_work_tree());
 
-	free(rel);
 	return init_db(git_dir, NULL, "", GIT_HASH_SHA1,
 		       REF_STORAGE_FORMAT_FILES, "main", 0, INIT_DB_QUIET);
 }
