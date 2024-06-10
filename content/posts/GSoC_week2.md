@@ -1,6 +1,6 @@
 ---
 title: "GSoC: Week 2"
-date: 2024-06-09
+date: 2024-06-10
 description: ""
 type: post
 weight: 25
