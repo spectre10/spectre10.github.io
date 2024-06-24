@@ -32,6 +32,14 @@ eye view of the progress:
 
 With all said and done, I gave an estimate of five to six tests to migrate in my original proposal before the halfway. And I am probably on track to that fulfill that estimate.
 
+Also, In one of the above patches, `t-hash`, I did not remove the old helpers `test-{sha1, sha256, hash}` due to them having other dependents. And one of them was `t0013-sha1dc.sh` which tested
+git's implementation of SHA1-DC to detect collision which can occur in SHA1. It namely tests against an attack known as [SHAttered](https://shattered.io/), which can craft two colliding PDFs
+and obtain a SHA-1 digital signature on the first PDF file which can also be abused as a valid signature on the second PDF file. [Patrick](https://gitlab.com/pks-gitlab) suggested on the mailing list that
+we might be able to use _git-hash-object_ to replace this `test-hash` helper which is used in `t0013-sha1dc.sh`. However, when passing those PDFs to _git-hash-object_, it did
+not detect any collision. And when I asked on the mailing list about it, [Jeff King (alias Peff)](https://github.com/peff) gave a detailed [explanation and clarification](https://lore.kernel.org/git/20240616045259.GA17750@coredump.intra.peff.net/) that when working with _git-hash-object_,
+it appends object type and size to the content. So, it is not a straight forward hashing of the content, therefore _git-hash-object_ cannot be used for this purpose. In fact, there is no
+git command which can hash arbitrary content without modifying it. So, in sum, those helpers cannot be removed as we'd need some mechanism for hashing arbitrary data.
+
 ## So what is the plan ahead?
 
 For the next week, I plan to finish writing `t-urlmatch-normalization` and also reiterate, if necessary based on the reviews, on `t-oidmap`, `t-oid-array` and `t-hashmap`.
