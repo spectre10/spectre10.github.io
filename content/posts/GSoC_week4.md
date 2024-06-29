@@ -21,8 +21,8 @@ probably send out that patch as well in the coming week.
 There were no particular difficulties that I faced in this week. It was rather smooth as I migrated two legacy tests to the unit tests. To give a bird's
 eye view of the progress:
 
- - [t-strcmp-offset](https://lore.kernel.org/git/20240519204530.12258-3-shyamthakkar001@gmail.com/) (Co-authered-by: [Achu Luma](https://github.com/achluma)) (master)
- - [t-hash](https://lore.kernel.org/git/20240529080030.64410-1-shyamthakkar001@gmail.com/) (Co-authered-by: [Achu Luma](https://github.com/achluma)) (master)
+ - [t-strcmp-offset](https://lore.kernel.org/git/20240519204530.12258-3-shyamthakkar001@gmail.com/) (Co-authored-by: [Achu Luma](https://github.com/achluma)) (master)
+ - [t-hash](https://lore.kernel.org/git/20240529080030.64410-1-shyamthakkar001@gmail.com/) (Co-authored-by: [Achu Luma](https://github.com/achluma)) (master)
  - [t-example-decorate](https://lore.kernel.org/git/20240528125837.31090-1-shyamthakkar001@gmail.com/) (master)
  - [t-oidtree](https://lore.kernel.org/git/20240608165731.29467-1-shyamthakkar001@gmail.com/) (master)
  - [t-oidmap](https://lore.kernel.org/git/ZnP6G6SSBynlBNUj@google.com/T/#mcfac487a68d2847638308aa4eb4d281444f06f31) (posted, waiting for review on the mailing list)
